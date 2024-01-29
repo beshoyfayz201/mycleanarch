@@ -1,13 +1,13 @@
 import 'dart:convert';
 
- 
+import 'package:bookly/Features/home/domain/entity/book_entity.dart';
+
 import 'access_info.dart';
 import 'sale_info.dart';
 import 'search_info.dart';
 import 'volume_info.dart';
 
-
-class Item {
+class BookModel extends BookEntity{
   final String? kind;
   final String? id;
   final String? etag;
@@ -17,7 +17,7 @@ class Item {
   final AccessInfo? accessInfo;
   final SearchInfo? searchInfo;
 
-  const Item({
+   BookModel({
     this.kind,
     this.id,
     this.etag,
@@ -26,9 +26,10 @@ class Item {
     this.saleInfo,
     this.accessInfo,
     this.searchInfo,
-  });
+  }):super(authorName: volumeInfo!.authors!.first,image: volumeInfo.imageLinks!.thumbnail??"",price: 0.0,rating: 1.2,
+  title: volumeInfo.title!);
 
-  factory Item.fromMap(Map<String, dynamic> data) => Item(
+  factory BookModel.fromMap(Map<String, dynamic> data) => BookModel(
         kind: data['kind'] as String?,
         id: data['id'] as String?,
         etag: data['etag'] as String?,
@@ -45,6 +46,7 @@ class Item {
         searchInfo: data['searchInfo'] == null
             ? null
             : SearchInfo.fromMap(data['searchInfo'] as Map<String, dynamic>),
+            
       );
 
   Map<String, dynamic> toMap() => {
@@ -60,13 +62,13 @@ class Item {
 
   /// `dart:convert`
   ///
-  /// Parses the string and returns the resulting Json object as [Item].
-  factory Item.fromJson(String data) {
-    return Item.fromMap(json.decode(data) as Map<String, dynamic>);
+  /// Parses the string and returns the resulting Json object as [BookModel].
+  factory BookModel.fromJson(String data) {
+    return BookModel.fromMap(json.decode(data) as Map<String, dynamic>);
   }
 
   /// `dart:convert`
   ///
-  /// Converts [Item] to a JSON string.
+  /// Converts [BookModel] to a JSON string.
   String toJson() => json.encode(toMap());
 }

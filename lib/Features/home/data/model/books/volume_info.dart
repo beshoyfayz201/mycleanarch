@@ -13,7 +13,7 @@ class VolumeInfo {
   final String? description;
   final List<IndustryIdentifier>? industryIdentifiers;
   final ReadingModes? readingModes;
-  final int? pageCount;
+  final num? pageCount;
   final String? printType;
   final List<String>? categories;
   final String? maturityRating;
@@ -61,7 +61,7 @@ class VolumeInfo {
             ? null
             : ReadingModes.fromMap(
                 data['readingModes'] as Map<String, dynamic>),
-        pageCount: data['pageCount'] as int?,
+        pageCount: data['pageCount'] as num?,
         printType: data['printType'] as String?,
         categories: data['categories'] as List<String>?,
         maturityRating: data['maturityRating'] as String?,

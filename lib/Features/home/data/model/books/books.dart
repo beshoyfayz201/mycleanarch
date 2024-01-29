@@ -1,20 +1,19 @@
 import 'dart:convert';
 
-
 import 'item.dart';
 
-class Books {
+class BookResponse {
   final String? kind;
-  final int? totalItems;
-  final List<Item>? items;
+  final num? totalItems;
+  final List<BookModel>? items;
 
-  const Books({this.kind, this.totalItems, this.items});
+  const BookResponse({this.kind, this.totalItems, this.items});
 
-  factory Books.fromMap(Map<String, dynamic> data) => Books(
+  factory BookResponse.fromMap(Map<String, dynamic> data) => BookResponse(
         kind: data['kind'] as String?,
-        totalItems: data['totalItems'] as int?,
+        totalItems: data['totalItems'] as num?,
         items: (data['items'] as List<dynamic>?)
-            ?.map((e) => Item.fromMap(e as Map<String, dynamic>))
+            ?.map((e) => BookModel.fromMap(e as Map<String, dynamic>))
             .toList(),
       );
 
@@ -26,13 +25,13 @@ class Books {
 
   /// `dart:convert`
   ///
-  /// Parses the string and returns the resulting Json object as [Books].
-  factory Books.fromJson(String data) {
-    return Books.fromMap(json.decode(data) as Map<String, dynamic>);
+  /// Parses the string and returns the resulting Json object as [BookResponse].
+  factory BookResponse.fromJson(String data) {
+    return BookResponse.fromMap(json.decode(data) as Map<String, dynamic>);
   }
 
   /// `dart:convert`
   ///
-  /// Converts [Books] to a JSON string.
+  /// Converts [BookResponse] to a JSON string.
   String toJson() => json.encode(toMap());
 }

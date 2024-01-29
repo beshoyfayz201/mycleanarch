@@ -1,5 +1,5 @@
 class BookEntity {
-  final int price;
+  final num price;
   final String title;
   final String image;
   final String authorName;
