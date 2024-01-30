@@ -7,7 +7,7 @@ abstract class HomeLocalDataSource {
   List<BookEntity> fetchFeturedBooks();
 }
 
-class HomeLocalDataSoureImp extends HomeLocalDataSource {
+class HomeLocalDataSourceImp extends HomeLocalDataSource {
   @override
   List<BookEntity> fetchFeturedBooks() {
     List<BookEntity> books =
