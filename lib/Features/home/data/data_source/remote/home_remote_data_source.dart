@@ -18,7 +18,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
 
   @override
   Future<List<BookEntity>> fetchNewest()async {
-   var res =await apiServices.get(endpoint: 'volumes?q=spatium');
+   var res =await apiServices.get(endpoint: 'volumes?q=spatium&sorting=newest');
     return BookResponse.fromMap(res).items!;
 
   }
