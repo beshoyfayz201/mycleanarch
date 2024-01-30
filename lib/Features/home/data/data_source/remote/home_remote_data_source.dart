@@ -25,6 +25,9 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
   Future<List<BookEntity>> fetchNewest() async {
     var res =
         await apiServices.get(endpoint: 'volumes?q=spatium&sorting=newest');
+    List<BookEntity> books = BookResponse.fromMap(res).items!;
+
+    Hive.box(AppConsts.newestHiveBox).addAll(books);
     return BookResponse.fromMap(res).items!;
   }
 }

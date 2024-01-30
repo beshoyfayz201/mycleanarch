@@ -3,12 +3,13 @@ import 'package:bookly/constants.dart';
 import 'package:bookly/core/utils/app_router.dart';
 import 'package:bookly/core/utils/appconsts.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 
 void main() async {
   runApp(const Bookly());
+  await Hive.initFlutter();
   Hive.registerAdapter(BookEntityAdapter());
- await Hive.openBox(AppConsts.faturedHiveBox);
+  await Hive.openBox(AppConsts.faturedHiveBox);
 }
 
 class Bookly extends StatelessWidget {
