@@ -18,7 +18,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
   });
   @override
   Future<List<BookEntity>> fetchFeatured() async {
-    var res = await apiServices.get(endpoint: 'volumes?q=spatium');
+    var res = await apiServices.get(endpoint: 'volumes?q=programming');
 
     List<BookEntity> books = BookResponse.fromMap(res).items!;
     Hive.box<BookEntity>(AppConsts.faturedHiveBox).addAll(books);
@@ -28,7 +28,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
   @override
   Future<List<BookEntity>> fetchNewest() async {
     var res =
-        await apiServices.get(endpoint: 'volumes?q=spatium&sorting=newest');
+        await apiServices.get(endpoint: 'volumes?q=software&sorting=newest');
     List<BookEntity> books = BookResponse.fromMap(res).items!;
 
     Hive.box<BookEntity>(AppConsts.newestHiveBox).addAll(books);

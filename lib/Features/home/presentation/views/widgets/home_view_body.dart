@@ -47,11 +47,15 @@ class HomeViewBody extends StatelessWidget {
             child: BlocBuilder<NewestBooksCubit, NewestBooksState>(
               builder: (context, state) {
                 if (state is NewestBooksSuccess) {
-                  return  BestSellerListView(state.books);
+                  return BestSellerListView(state.books);
                 } else if (state is NewestBooksFailure) {
                   return Text(state.failure.message);
                 } else {
-                  return const CircularProgressIndicator();
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 130, vertical: 180),
+                    child: const CircularProgressIndicator(),
+                  );
                 }
               },
             ),
@@ -76,7 +80,7 @@ class FeaturedBooksListViewBlocBuilder extends StatelessWidget {
         } else if (state is FeaturedBooksFailure) {
           return Center(child: Text(state.failure.message));
         } else {
-          return const CircularProgressIndicator();
+          return const LinearProgressIndicator();
         }
       },
     );
