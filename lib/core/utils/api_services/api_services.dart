@@ -9,7 +9,8 @@ class ApiServices {
   get(
       {Map<String, dynamic>? params,
       Map<String, dynamic>? body,
-      required String endpoint}) async{
-    return await dio.get(endpoint, data: body, queryParameters: params);
+      required String endpoint}) async {
+    var res = await dio.get(endpoint, data: body, queryParameters: params);
+    return res.data;
   }
 }

@@ -1,3 +1,5 @@
+import 'package:bookly/Features/home/data/model/books/item.dart';
+import 'package:bookly/Features/home/data/model/books/volume_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -44,9 +46,17 @@ class SearchResultListView extends StatelessWidget {
       padding: EdgeInsets.zero,
       itemCount: 10,
       itemBuilder: (context, index) {
-        return const Padding(
-          padding: EdgeInsets.symmetric(vertical: 10),
-          child: BookListViewItem(),
+        return Padding(
+          padding:const EdgeInsets.symmetric(vertical: 10),
+          child: BookListViewItem(BookModel(
+              accessInfo: null,
+              etag: '',
+              id: '',
+              kind: '',
+              saleInfo: null,
+              searchInfo: null,
+              selfLink: null,
+              volumeInfo:const VolumeInfo())),
         );
       },
     );

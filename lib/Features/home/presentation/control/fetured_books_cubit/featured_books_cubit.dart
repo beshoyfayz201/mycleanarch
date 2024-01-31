@@ -14,4 +14,5 @@ class FeaturedBooksCubit extends Cubit<FeaturedBooksState> {
     res.fold((failure) => emit(FeaturedBooksFailure(failure)),
         (books) => emit(FeaturedBooksSuccess(books)));
   }
+  
 }

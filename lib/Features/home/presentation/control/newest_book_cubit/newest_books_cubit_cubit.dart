@@ -5,4 +5,12 @@ import 'package:bookly/Features/home/presentation/control/newest_book_cubit/newe
 class NewestBooksCubit extends Cubit<NewestBooksState> {
   FetchNewestUseCase fetchNewestUseCase;
   NewestBooksCubit(this.fetchNewestUseCase) : super(NewestBooksInitial());
+
+   Future<void> fetchNewest() async {
+    emit(NewestBooksLoading());
+    var res = await fetchNewestUseCase.call();
+    res.fold((failure) => emit(NewestBooksFailure(failure)),
+        (books) => emit(NewestBooksSuccess(books)));
+  }
+  
 }

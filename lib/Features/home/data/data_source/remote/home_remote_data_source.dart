@@ -21,7 +21,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
     var res = await apiServices.get(endpoint: 'volumes?q=spatium');
 
     List<BookEntity> books = BookResponse.fromMap(res).items!;
-    Hive.box(AppConsts.faturedHiveBox).addAll(books);
+    Hive.box<BookEntity>(AppConsts.faturedHiveBox).addAll(books);
     return books;
   }
 
@@ -31,7 +31,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
         await apiServices.get(endpoint: 'volumes?q=spatium&sorting=newest');
     List<BookEntity> books = BookResponse.fromMap(res).items!;
 
-    Hive.box(AppConsts.newestHiveBox).addAll(books);
+    Hive.box<BookEntity>(AppConsts.newestHiveBox).addAll(books);
     return BookResponse.fromMap(res).items!;
   }
 }

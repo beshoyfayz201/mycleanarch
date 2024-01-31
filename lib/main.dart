@@ -1,5 +1,5 @@
+import 'package:bookly/Features/home/data/repos/home_repo_impl.dart';
 import 'package:bookly/Features/home/domain/entity/book_entity.dart';
-import 'package:bookly/Features/home/domain/repos/home_repo.dart';
 import 'package:bookly/Features/home/domain/usecases/fatch_newest_use_case.dart';
 import 'package:bookly/Features/home/domain/usecases/fetch_featured_books_use_case.dart';
 import 'package:bookly/Features/home/presentation/control/fetured_books_cubit/featured_books_cubit.dart';
@@ -19,8 +19,8 @@ void main() async {
   setupServiceLocator();
 
   Hive.registerAdapter(BookEntityAdapter());
-  await Hive.openBox(AppConsts.faturedHiveBox);
-  await Hive.openBox(AppConsts.newestHiveBox);
+  await Hive.openBox<BookEntity>(AppConsts.faturedHiveBox);
+  await Hive.openBox<BookEntity>(AppConsts.newestHiveBox);
   Bloc.observer = SimpleBlockObserver();
   runApp(const Bookly());
 }
@@ -34,10 +34,12 @@ class Bookly extends StatelessWidget {
       providers: [
         BlocProvider(
             create: (context) => FeaturedBooksCubit(
-                FetchFeaturedBooksUseCase(homeRepo: getIt.get<HomeRepo>()))),
+                FetchFeaturedBooksUseCase(homeRepo: getIt.get<HomeRepoImpl>()))
+              ..fetchFeatured()),
         BlocProvider(
             create: (context) => NewestBooksCubit(
-                FetchNewestUseCase(homeRepo: getIt.get<HomeRepo>()))),
+                FetchNewestUseCase(homeRepo: getIt.get<HomeRepoImpl>()))
+              ..fetchNewest()),
       ],
       child: MaterialApp.router(
         routerConfig: AppRouter.router,

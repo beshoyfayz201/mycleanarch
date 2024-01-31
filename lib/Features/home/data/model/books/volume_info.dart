@@ -7,7 +7,7 @@ import 'reading_modes.dart';
 
 class VolumeInfo {
   final String? title;
-  final List<String>? authors;
+  final List<dynamic>? authors;
   final String? publisher;
   final String? publishedDate;
   final String? description;
@@ -15,7 +15,7 @@ class VolumeInfo {
   final ReadingModes? readingModes;
   final num? pageCount;
   final String? printType;
-  final List<String>? categories;
+  final List<dynamic>? categories;
   final String? maturityRating;
   final bool? allowAnonLogging;
   final String? contentVersion;
@@ -50,7 +50,7 @@ class VolumeInfo {
 
   factory VolumeInfo.fromMap(Map<String, dynamic> data) => VolumeInfo(
         title: data['title'] as String?,
-        authors: data['authors'] as List<String>?,
+        authors: data['authors'] ?? [''],
         publisher: data['publisher'] as String?,
         publishedDate: data['publishedDate'] as String?,
         description: data['description'] as String?,
@@ -63,7 +63,7 @@ class VolumeInfo {
                 data['readingModes'] as Map<String, dynamic>),
         pageCount: data['pageCount'] as num?,
         printType: data['printType'] as String?,
-        categories: data['categories'] as List<String>?,
+        categories: data['categories'] as List<dynamic>?,
         maturityRating: data['maturityRating'] as String?,
         allowAnonLogging: data['allowAnonLogging'] as bool?,
         contentVersion: data['contentVersion'] as String?,
@@ -72,7 +72,7 @@ class VolumeInfo {
             : PanelizationSummary.fromMap(
                 data['panelizationSummary'] as Map<String, dynamic>),
         imageLinks: data['imageLinks'] == null
-            ? null
+            ?const  ImageLinks(smallThumbnail: null, thumbnail: null)
             : ImageLinks.fromMap(data['imageLinks'] as Map<String, dynamic>),
         language: data['language'] as String?,
         previewLink: data['previewLink'] as String?,
